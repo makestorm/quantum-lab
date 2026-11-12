@@ -1,0 +1,185 @@
+{
+  "checks": [
+    {
+      "id": "input_legality",
+      "name": "输入合法性",
+      "status": "pass",
+      "metric": {
+        "name": "问题项数",
+        "value": 0.0
+      },
+      "tolerance": 0.0,
+      "detail": "canonical request 与 result 结构满足白名单、范围与契约结构约束。",
+      "scope": "spec.normalize_request 的 canonical 约束 + CONTRACT 第 2 节结构"
+    },
+    {
+      "id": "finite_values",
+      "name": "数值有限性",
+      "status": "pass",
+      "metric": {
+        "name": "NaN/Inf 计数",
+        "value": 0.0
+      },
+      "tolerance": 0.0,
+      "detail": "共检查 12060 个数值，未发现 NaN/Inf。",
+      "scope": "result 中所有数值数组与标量（含 sweep 摘要）"
+    },
+    {
+      "id": "hermiticity",
+      "name": "厄米性",
+      "status": "pass",
+      "metric": {
+        "name": "max|H-H†|",
+        "value": 0.0
+      },
+      "tolerance": 1e-10,
+      "detail": "max|H-H†|=0.000e+00；H 为厄米矩阵，谱分解前提成立。",
+      "scope": "全体模型；H 必须等于其共轭转置"
+    },
+    {
+      "id": "eigen_residual",
+      "name": "本征方程残差",
+      "status": "pass",
+      "metric": {
+        "name": "max|Hv_k-E_k v_k|",
+        "value": 1.1102230246251565e-16
+      },
+      "tolerance": 1e-08,
+      "detail": "max|Hv-Ev|=1.110e-16；本征对满足本征方程。",
+      "scope": "全体模型；检查 np.linalg.eigh 输出的本征对"
+    },
+    {
+      "id": "orthonormality",
+      "name": "正交归一性",
+      "status": "pass",
+      "metric": {
+        "name": "max|V†V-I|",
+        "value": 2.220446049250313e-16
+      },
+      "tolerance": 1e-08,
+      "detail": "max|V†V-I|=2.220e-16；本征矢构成正交归一基。",
+      "scope": "全体模型；本征矢矩阵应为酉矩阵"
+    },
+    {
+      "id": "state_norm",
+      "name": "态归一化",
+      "status": "pass",
+      "metric": {
+        "name": "max|||ψ(t)||-1|",
+        "value": 4.440892098500626e-16
+      },
+      "tolerance": 1e-09,
+      "detail": "max|||ψ(t)||-1|=4.441e-16；幺正演化保持态归一。",
+      "scope": "自旋与谐振子；微扰模型无时间演化"
+    },
+    {
+      "id": "probability",
+      "name": "概率守恒",
+      "status": "pass",
+      "metric": {
+        "name": "max|P↑+P↓-1|",
+        "value": 1.1102230246251565e-15
+      },
+      "tolerance": 1e-09,
+      "detail": "max|P↑+P↓-1|=1.110e-15；概率解释自洽。",
+      "scope": "自旋模型；两个基态占据之和"
+    },
+    {
+      "id": "energy_real",
+      "name": "能量实数",
+      "status": "pass",
+      "metric": {
+        "name": "max(|Im E_k|, |Im⟨H⟩|)",
+        "value": 0.0
+      },
+      "tolerance": 1e-10,
+      "detail": "max(|Im E_k|, |Im⟨H⟩|)=0.000e+00；能量为实数。",
+      "scope": "全体模型；厄米 H 的能量本征值与期望值必须为实数"
+    },
+    {
+      "id": "energy_conservation",
+      "name": "能量守恒",
+      "status": "pass",
+      "metric": {
+        "name": "max|Δ⟨H⟩|/max(|⟨H⟩|,1)",
+        "value": 6.661338147750939e-16
+      },
+      "tolerance": 1e-08,
+      "detail": "相对漂移 6.661e-16；封闭系统 ⟨H⟩ 守恒。",
+      "scope": "自旋与谐振子；微扰模型无时间演化"
+    },
+    {
+      "id": "analytic_agreement",
+      "name": "解析结果对比",
+      "status": "pass",
+      "metric": {
+        "name": "max|数值-解析|",
+        "value": 1.1102230246251565e-15
+      },
+      "tolerance": 1e-06,
+      "detail": "数值与解析解最大绝对偏差 1.110e-15（pop_1=7.772e-16，expect_x=3.331e-16，expect_y=7.772e-16，expect_z=1.110e-15）；解析解是同一离散模型下的精确参照。",
+      "scope": "自旋（Bloch 进动）与谐振子（⟨x⟩/⟨p⟩ 解析式）；微扰模型无含时解析解"
+    },
+    {
+      "id": "spectrum_agreement",
+      "name": "能谱对比",
+      "status": "skipped",
+      "metric": {
+        "name": "不适用",
+        "value": 0.0
+      },
+      "tolerance": 0.0,
+      "detail": "按验证规范，能谱对比仅适用于谐振子；spin_half 不适用（自旋 E± 由解析 Bloch 对比与厄米性/本征残差检查约束）",
+      "scope": "Eₙ vs 解析能谱"
+    },
+    {
+      "id": "truncation_diagnostic",
+      "name": "截断诊断",
+      "status": "skipped",
+      "metric": {
+        "name": "不适用",
+        "value": 0.0
+      },
+      "tolerance": 0.0,
+      "detail": "spin_half 没有 Fock 截断空间，截断诊断不适用",
+      "scope": "有限 Fock 截断"
+    },
+    {
+      "id": "solver_reference",
+      "name": "求解器参照",
+      "status": "skipped",
+      "metric": {
+        "name": "不适用",
+        "value": 0.0
+      },
+      "tolerance": 0.0,
+      "detail": "求解器闭式解参照仅用于微扰模型，spin_half 不适用",
+      "scope": "精确对角化 vs 闭式解"
+    },
+    {
+      "id": "perturbation_scope",
+      "name": "微扰适用范围",
+      "status": "skipped",
+      "metric": {
+        "name": "不适用",
+        "value": 0.0
+      },
+      "tolerance": 0.0,
+      "detail": "spin_half 不包含微扰展开，适用范围检查不适用",
+      "scope": "二阶微扰只在 λ/Δ≪1 时可靠"
+    }
+  ],
+  "overall": "pass",
+  "counts": {
+    "pass": 10,
+    "fail": 0,
+    "skipped": 4
+  },
+  "failed": [],
+  "limits": [
+    "统一采用 ħ=1 的无量纲约定：能量与角频率同单位、时间以 Ω⁻¹ 或 ω⁻¹ 度量。",
+    "求解器为厄米矩阵谱分解 np.linalg.eigh（U(t)=V e^{-iΛ(t-t_start)} V†）；误差指标只衡量数值一致性，不替代物理建模假设。",
+    "仅对 Ωx=2.0、Ωy=0.0、Ωz=1.0、初态 kind='up'、t∈[0.0, 2.8099258924162904] 成立；未验证含时驱动、退相干与噪声。",
+    "未涵盖：有限温度、开放量子系统（Lindblad/退相干）、多体关联、显含时哈密顿量与实验噪声。"
+  ]
+}

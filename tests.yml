@@ -1,0 +1,62 @@
+name: tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  unit:
+    name: 单元测试与自检 (${{ matrix.os }} / py${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: 单元测试（模型 / 图表 / 实验库）
+        run: python -m unittest discover -s tests -t tests -p "test_*.py" -v
+
+      - name: 物理基准自检
+        run: python scripts/quantum_lab.py selfcheck
+
+      - name: 独立参照实现自检
+        run: python tests/reference_physics.py
+
+      - name: 示例冒烟（run/list/rerun/derive/compare/export）
+        run: python examples/run_examples.py --quiet
+
+  integration:
+    name: 交叉验证套件 (windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: 独立交叉 / 对抗 / 端到端验证（参照实现 Taylor + RK4 + 闭式解）
+        run: python tests/test_integration.py
+
+      - name: 汇总验证结果
+        if: always()
+        run: python tests/summarize_results.py

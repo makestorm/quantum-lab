@@ -1,0 +1,8 @@
+{
+  "model": "perturbation",
+  "params": {
+    "delta": 1.0,
+    "lambda": 0.1
+  },
+  "question": "非简并微扰：一阶/二阶能量与精确对角化对比，给出近似适用范围。"
+}

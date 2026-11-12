@@ -1,0 +1,8 @@
+{
+  "model": "harmonic_oscillator",
+  "params": {
+    "omega": 1.0,
+    "n_levels": 40
+  },
+  "question": "谐振子 (|0>+|1>)/√2 叠加态的时间演化，看位置期望与相对相位的影响。"
+}

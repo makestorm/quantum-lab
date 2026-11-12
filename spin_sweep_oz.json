@@ -1,0 +1,16 @@
+{
+  "model": "spin_half",
+  "params": {
+    "Omega_x": 2.0
+  },
+  "sweep": {
+    "param": "Omega_z",
+    "values": [
+      0.0,
+      0.5,
+      1.0,
+      2.0
+    ]
+  },
+  "question": "比较 Ωz=0、0.5、1、2 时的跃迁概率，把曲线画在同一张图里。"
+}

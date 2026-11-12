@@ -1,0 +1,59 @@
+{
+  "schema": "quantumlab/1",
+  "model": "spin_half",
+  "params": {
+    "Omega_x": 2.0,
+    "Omega_y": 0.0,
+    "Omega_z": 1.0
+  },
+  "initial_state": {
+    "kind": "up",
+    "vector": null
+  },
+  "time": {
+    "t_start": 0.0,
+    "t_end": 2.8099258924162904,
+    "n_steps": 401
+  },
+  "units": {
+    "hbar": 1.0,
+    "note": "ħ=1，Ω/ω/Δ/λ 与角频率同量纲"
+  },
+  "solver": {
+    "method": "eigendecomposition",
+    "note": "H 厄米 → np.linalg.eigh 谱分解，U(t)=V exp(-iΛt) V†"
+  },
+  "sweep": null,
+  "tolerance": {
+    "hermiticity_abs": 1e-10,
+    "eigen_residual_abs": 1e-08,
+    "orthonormality_abs": 1e-08,
+    "norm_dev": 1e-09,
+    "probability_sum": 1e-09,
+    "energy_imag": 1e-10,
+    "energy_drift": 1e-08,
+    "analytic_abs": 1e-06,
+    "truncation_pop": 1e-06,
+    "spectrum_abs": 1e-08,
+    "perturbation_rel": 0.01
+  },
+  "output": {
+    "figures": true,
+    "formats": [
+      "json",
+      "csv",
+      "png",
+      "html"
+    ]
+  },
+  "question": "计算 Ωx=2、Ωz=1 的自旋二能级系统，画出演化曲线，并解释为什么跃迁概率达不到 1。",
+  "provenance": {
+    "Omega_x": "params",
+    "Omega_z": "params",
+    "Omega_y": "default"
+  },
+  "warnings": [
+    "未提供 Omega_y，采用默认值 0（未驱动方向）",
+    "未提供 time.t_end，采用默认 2π/Ωeff = 2.80993（一个完整振荡周期）"
+  ]
+}

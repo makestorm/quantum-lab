@@ -1,0 +1,23 @@
+{
+  "model": "harmonic_oscillator",
+  "params": {
+    "omega": 1.0
+  },
+  "initial_state": {
+    "kind": "coherent",
+    "alpha": [
+      1.0,
+      0.0
+    ]
+  },
+  "sweep": {
+    "param": "n_levels",
+    "values": [
+      8,
+      16,
+      32,
+      64
+    ]
+  },
+  "question": "不同截断维数下相干态 ⟨x⟩ 的变化，检查截断影响。"
+}

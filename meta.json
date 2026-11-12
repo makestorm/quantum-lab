@@ -1,0 +1,15 @@
+{
+  "id": "ql-20261112-121251-fe8b",
+  "created_at": "2026-11-12T12:12:51+08:00",
+  "model": "spin_half",
+  "params": {
+    "Omega_x": 2.0,
+    "Omega_y": 0.0,
+    "Omega_z": 1.0
+  },
+  "parent_id": null,
+  "relation": null,
+  "duration_ms": 1050,
+  "solver": "eigendecomposition",
+  "question": "计算 Ωx=2、Ωz=1 的自旋二能级系统，画出演化曲线，并解释为什么跃迁概率达不到 1。"
+}

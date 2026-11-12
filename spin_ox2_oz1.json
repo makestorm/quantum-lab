@@ -1,0 +1,11 @@
+{
+  "model": "spin_half",
+  "params": {
+    "Omega_x": 2.0,
+    "Omega_z": 1.0
+  },
+  "initial_state": {
+    "kind": "up"
+  },
+  "question": "计算 Ωx=2、Ωz=1 的自旋二能级系统，画出演化曲线，并解释为什么跃迁概率达不到 1。"
+}
