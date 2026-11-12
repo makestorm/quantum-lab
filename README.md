@@ -155,21 +155,6 @@ quantum-lab/
 └── README.md
 ```
 
-## 发布到 GitHub
-
-仓库可直接上传（当前目录已经是干净的仓库布局：无缓存、无运行产物、无密钥）。
-
-```bash
-cd quantum-lab
-git init -b main
-git add .
-git commit -m "feat: QuantumLab v1.0.0 初始版本（三类模型 + 验证内核 + 报告导出）"
-git remote add origin https://github.com/ZhouFeng/quantum-lab.git
-git push -u origin main
-```
-
-如果使用网页上传：把 `quantum-lab/` 里的内容（含隐藏目录 `.github/`、`.gitignore`）拖进新仓库即可；
-`examples/sample-experiment/` 与 `references/`、`docs/` 都要一并上传，README 中的图片与文档链接依赖它们。
 
 ## 设计原则
 
